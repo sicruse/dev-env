@@ -18,29 +18,6 @@ else
   softwareupdate -i "$PROD" -v;
 fi
 
-# Deprecated, will use brew to install ruby
-############ Install RVM ############
-# if ! [ -d "~/.rvm" ]; then
-#     echo "Installing RVM..."
-#     curl -sSL https://get.rvm.io | bash -s stable
-#     source ~/.rvm/scripts/rvm
-#     echo "source ~/.rvm/scripts/rvm" >> ~/.bashrc
-    
-#     echo -n "RVM version is: "
-#     rvm --version
-
-#     echo "Installing Ruby..."
-#     rvm install ruby
-
-#     echo "Making installed Ruby the default one..."
-#     rvm use ruby --default
-
-#     echo "Installing latest version of Ruby Gems..."
-#     rvm rubygems current
-# else
-#  echo RVM already present...
-# fi
-
 ############ Install Homebrew ############
 if ! command -v brew >/dev/null; then
   echo Installing Homebrew...
