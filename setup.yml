@@ -35,6 +35,24 @@
       shell: bash -lc "rbenv install {{ rbenv.ruby_version }}"
       when:
         - ruby_installed.rc != 0
+      tags:
+        - rbenv
+        
+    - name: check if current system ruby version is {{ rbenv.ruby_version }}
+      shell: $SHELL -lc "rbenv version | cut -d ' ' -f 1 | grep -Fx '{{ rbenv.ruby_version }}'"
+      register: ruby_selected
+      changed_when: false
+      ignore_errors: yes
+      always_run: yes
+      tags:
+        - rbenv
+
+    - name: set ruby {{ rbenv.ruby_version }} for system
+      shell: bash -lc "rbenv global {{ rbenv.ruby_version }} && rbenv rehash"
+      when:
+        - ruby_selected.rc != 0
+      tags:
+        - rbenv
 
     - name: Install foundational ruby gems
       gem:
