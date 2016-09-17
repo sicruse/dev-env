@@ -1,0 +1,26 @@
+#!/bin/bash
+
+############ Set up ############
+echo In order to install software we need you to provide your sudo password...
+sudo -v # ask for sudo upfront
+
+############ Install XCode command line tools ############
+echo Installing XCode command line tools...
+touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress;
+PROD=$(softwareupdate -l |
+  grep "\*.*Command Line" |
+  head -n 1 | awk -F"*" '{print $2}' |
+  sed -e 's/^ *//' |
+  tr -d '\n')
+softwareupdate -i "$PROD" -v;
+
+############ Install Homebrew ############
+# supress the need to press 'return' when in the install script runs.
+echo Installing Homebrew...
+yes '' | ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+############ Install some cask apps ############
+echo Installing Ansible...
+brew cask install 'ansible'
+
+echo "And done..."
