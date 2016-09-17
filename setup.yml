@@ -22,6 +22,11 @@
         - google-chrome
         - sourcetree
 
+    - name: update .bash_profile to include rbenv
+      become: yes
+      become_user: sicruse
+      lineinfile: dest=/test/test.conf regexp='' insertafter=EOF line='eval "$(rbenv init -)"' state=present create=True
+
     - name: check ruby {{ rbenv.ruby_version }} installed for system
       shell: $SHELL -lc "rbenv versions | grep {{ rbenv.ruby_version }}"
       register: ruby_installed
@@ -55,8 +60,6 @@
         - rbenv
 
     - name: Install foundational ruby gems
-      become: yes
-      become_user: sicruse
       gem:
         name: '{{ item.name | default(item) }}'
         state: '{{ item.state | default("present") }}'
