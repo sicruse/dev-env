@@ -55,6 +55,8 @@
         - rbenv
 
     - name: Install foundational ruby gems
+      become: yes
+      become_user: sicruse
       gem:
         name: '{{ item.name | default(item) }}'
         state: '{{ item.state | default("present") }}'
