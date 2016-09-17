@@ -29,8 +29,12 @@ else
 fi
 
 ############ Install Ansible ############
-echo Installing Ansible...
-brew install ansible
+if ! command -v ansible >/dev/null; then
+   echo Installing Ansible...
+   brew install ansible
+else
+   echo Ansible already present...
+fi
 
 ############ Invoke Ansible ############
 echo Acquiring Ansible configuration...
