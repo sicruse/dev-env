@@ -36,7 +36,7 @@
       tags:
         - rbenv
 
-    - name: install ruby {{ rbenv.ruby_version }} for system
+    - name: install ruby {{ rbenv.ruby_version }}
       shell: bash -lc "rbenv install {{ rbenv.ruby_version }}"
       when:
         - ruby_installed.rc != 0
@@ -60,6 +60,8 @@
         - rbenv
 
     - name: Install foundational ruby gems
+      become: yes
+      become_user: sicruse
       gem:
         name: '{{ item.name | default(item) }}'
         state: '{{ item.state | default("present") }}'
