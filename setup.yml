@@ -16,3 +16,11 @@
         state: '{{ item.state | default("present") }}'
       with_items:
         - google-chrome
+        
+    - name: Install foundational ruby gems
+      gem:
+        name: '{{ item.name | default(item) }}'
+        state: '{{ item.state | default("present") }}'
+      with_items:
+        - cocoapods
+        - fastlane
