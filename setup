@@ -30,7 +30,7 @@ fi
 
 ############ Install Ansible ############
 echo Installing Ansible...
-brew install 'ansible'
+brew install ansible
 
 ############ Invoke Ansible ############
 echo Acquiring Ansible configuration...
