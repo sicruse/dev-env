@@ -25,7 +25,7 @@
     - name: update .bash_profile to include rbenv
       become: yes
       become_user: sicruse
-      lineinfile: dest=~/.bash_profile regexp='' insertafter=EOF line='eval "$(rbenv init -)"' state=present create=True
+      lineinfile: dest=~/.profile regexp='' insertafter=EOF line='eval "$(rbenv init -)"' state=present create=True
 
     - name: check ruby {{ rbenv.ruby_version }} installed for system
       shell: $SHELL -lc "rbenv versions | grep {{ rbenv.ruby_version }}"
