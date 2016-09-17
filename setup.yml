@@ -9,6 +9,7 @@
         state: '{{ item.state | default("present") }}'
       with_items:
         - git
+        - ruby
         
     - name: Install foundational Apps
       homebrew_cask:
