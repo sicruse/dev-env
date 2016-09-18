@@ -1,9 +1,9 @@
 ---
 - name: Setup MacOSX Development Environment
   hosts: all
-  vars:
-    rbenv:
-      ruby_version: 2.3.1
+  vars_files:
+    - vars/tools.yml
+    - vars/dock.yml
 
   tasks:
     - name: Install foundational opensource tools
@@ -11,60 +11,126 @@
         name: '{{ item.name | default(item) }}'
         state: '{{ item.state | default("present") }}'
       with_items:
-        - git
-        - rbenv
+        - dockutil
+        - zsh
+        - '{{ brew_tools }}'
+
+    - name: Update ~/.profile to include ruby gems path
+      become: yes
+      become_user: '{{ user_id }}'
+      blockinfile:
+        dest: ~/.profile
+        create: True
+        marker: "# {mark} ANSIBLE MANAGED BLOCK"
+        block: |
+          if which ruby >/dev/null && which gem >/dev/null; then
+            PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+          fi
 
     - name: Install foundational Apps
       homebrew_cask:
         name: '{{ item.name | default(item) }}'
         state: '{{ item.state | default("present") }}'
       with_items:
-        - google-chrome
-        - sourcetree
-
-    - name: update .bash_profile to include rbenv
-      become: yes
-      become_user: sicruse
-      lineinfile: dest=~/.profile regexp='' insertafter=EOF line='eval "$(rbenv init -)"' state=present create=True
-
-    - name: check ruby {{ rbenv.ruby_version }} installed for system
-      shell: $SHELL -lc "rbenv versions | grep {{ rbenv.ruby_version }}"
-      register: ruby_installed
-      changed_when: false
-      ignore_errors: yes
-      always_run: yes
-      tags:
-        - rbenv
-
-    - name: install ruby {{ rbenv.ruby_version }}
-      shell: bash -lc "rbenv install {{ rbenv.ruby_version }}"
-      when:
-        - ruby_installed.rc != 0
-      tags:
-        - rbenv
-        
-    - name: check if current system ruby version is {{ rbenv.ruby_version }}
-      shell: $SHELL -lc "rbenv version | cut -d ' ' -f 1 | grep -Fx '{{ rbenv.ruby_version }}'"
-      register: ruby_selected
-      changed_when: false
-      ignore_errors: yes
-      always_run: yes
-      tags:
-        - rbenv
-
-    - name: set ruby {{ rbenv.ruby_version }} for system
-      shell: bash -lc "rbenv global {{ rbenv.ruby_version }} && rbenv rehash"
-      when:
-        - ruby_selected.rc != 0
-      tags:
-        - rbenv
+        - iterm2
+        - '{{ cask_tools }}'
 
     - name: Install foundational ruby gems
       become: yes
-      become_user: sicruse
+      become_user: '{{ user_id }}'
       gem:
         name: '{{ item.name | default(item) }}'
         state: '{{ item.state | default("present") }}'
-      with_items:
-        - cocoapods
-        - fastlane
+      with_items: '{{ ruby_gems }}'
+
+    - name: Cloning oh-my-zsh
+      become: yes
+      become_user: '{{ user_id }}'
+      git:
+        repo=https://github.com/robbyrussell/oh-my-zsh
+        dest=~/.oh-my-zsh
+
+    - name: Cloning powerline shell
+      become: yes
+      become_user: '{{ user_id }}'
+      git:
+        repo=https://github.com/sicruse/powerline-shell.git
+        dest=~/.powerline-shell        
+
+    - name: Writing new powerline-shell config
+      become: yes
+      become_user: '{{ user_id }}'
+      template: >
+        src=powerline-shell-config.py.j2
+        dest=~/.powerline-shell/config.py
+        mode=0755     
+
+    - name: Configuring powerline-shell
+      become: yes
+      become_user: '{{ user_id }}'    
+      shell: ./install.py
+      args:
+        chdir: ~/.powerline-shell
+        creates: powerline-shell.py
+      # ignore_errors: true
+
+    - name: Creating powerline-shell symlink
+      become: yes
+      become_user: '{{ user_id }}'
+      file: src=~/.powerline-shell/powerline-shell.py dest=~/.powerline-shell.py state=link
+
+    - name: Cloning powerline fonts
+      become: yes
+      become_user: '{{ user_id }}'
+      git:
+        repo=https://github.com/powerline/fonts.git
+        dest=~/.powerline-fonts
+
+    - name: Configuring powerline fonts
+      become: yes
+      become_user: '{{ user_id }}'    
+      shell: ./install.sh
+      args:
+        chdir: ~/.powerline-fonts
+      # ignore_errors: true
+
+    - name: Writing new ~/.zshrc
+      become: yes
+      become_user: '{{ user_id }}'
+      template: >
+        src=zshrc.j2
+        dest=~/.zshrc
+        mode=0755      
+
+    - name: Setting user shell to zsh
+      become: yes
+      become_user: root
+      user: name='{{ user_id }}' shell=/usr/local/bin/zsh
+
+    - name: Writing iTerm2 preferences
+      become: yes
+      become_user: '{{ user_id }}'
+      template: >
+        src=com.googlecode.iterm2.plist.j2
+        dest=~/Library/Preferences/com.googlecode.iterm2.plist
+        mode=0755   
+
+    - name: Converting & reloading iTerm2 preferences
+      become: yes
+      become_user: '{{ user_id }}'    
+      shell: plutil -convert binary1 com.googlecode.iterm2.plist && defaults read com.googlecode.iterm2
+      args:
+        chdir: ~/Library/Preferences
+
+    - name: Remove unwanted ietms from Dock
+      shell: dockutil --remove '{{ item }}'
+      ignore_errors: true
+      with_items: '{{ dockitems_to_remove }}'
+     
+    - name: Check if items in dock exist
+      shell: dockutil --find '{{ item.name }}' || dockutil --add '{{ item.path }}'
+      with_items: '{{ dockitems_to_persist }}'
+     
+    - name: Fix order
+      shell: dockutil --move '{{ item.name }}' --position {{ item.pos }}
+      with_items: '{{ dockitems_to_persist }}'

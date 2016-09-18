@@ -36,9 +36,7 @@ else
 fi
 
 ############ Invoke Ansible ############
-echo Acquiring Ansible configuration...
-curl --silent -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/sicruse/mac-dev-env/master/setup.yml -o /tmp/setup.yml
 echo Invoking Ansible...
-ansible-playbook -i "localhost," -c local /tmp/setup.yml
+ansible-playbook -i "localhost," -c local setup.yml --extra-vars "user_id=$(whoami)"
 
-echo "And done..."
+echo "Setup complete..."

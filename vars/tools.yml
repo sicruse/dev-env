@@ -1,0 +1,10 @@
+---
+  brew_tools:
+    - git
+    - ruby
+  cask_tools:
+    - google-chrome
+    - sourcetree
+  ruby_gems:
+    - cocoapods
+    - fastlane
