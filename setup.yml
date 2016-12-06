@@ -2,6 +2,7 @@
 - name: Setup MacOSX Development Environment
   hosts: all
   vars_files:
+    - vars/vars.yml
     - vars/tools.yml
     - vars/dock.yml
 
@@ -13,6 +14,7 @@
       with_items:
         - dockutil
         - zsh
+        - git
         - '{{ brew_tools }}'
 
     - name: Update ~/.profile to include ruby gems path
@@ -42,6 +44,14 @@
         name: '{{ item.name | default(item) }}'
         state: '{{ item.state | default("present") }}'
       with_items: '{{ ruby_gems }}'
+
+    - name: Configuring git
+      become: yes
+      become_user: '{{ user_id }}'
+      template: >
+        src=gitconfig.j2
+        dest=~/.gitconfig
+        mode=0755        
 
     - name: Cloning oh-my-zsh
       become: yes

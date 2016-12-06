@@ -1,10 +1,19 @@
 ---
   brew_tools:
-    - git
     - ruby
+    - git-flow
   cask_tools:
     - google-chrome
     - sourcetree
+    - sublime-text
+    - p4merge
+    - hipchat
+    - microsoft-office
+    - nozbe
+    - parallels-desktop
+    - ripit
+    - dropbox
+    - evernote
   ruby_gems:
     - cocoapods
     - fastlane
