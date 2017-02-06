@@ -40,6 +40,6 @@ fi
 
 ############ Invoke Ansible ############
 echo Invoking Ansible...
-ansible-playbook -i "localhost," -c local setup.yml --extra-vars "user_id=$(whoami)"
+ansible-playbook -i "localhost," -c local $HOME/.dotfiles/setup.yml --extra-vars "user_id=$(whoami)"
 
 echo "Setup complete..."
