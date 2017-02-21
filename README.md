@@ -3,6 +3,15 @@ Si Cruse's dotfiles
 
 My dotfiles configuration for Mac OSX provides a one-stop shop for preparing a new Mac for productive use.
 
+Installation
+------------
+
+**PLEASE READ:** the following command will download a script which requires sudo (root) privileges to run. You should always understand the intention of any script which does this.
+
+```bash
+curl https://raw.githubusercontent.com/sicruse/dotfiles/master/remote-setup.sh | sh
+```
+
 Key Foundational Components
 ---------------------------
 
