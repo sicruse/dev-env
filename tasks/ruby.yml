@@ -1,0 +1,28 @@
+---
+# tasks file for foundational tools
+  - name: Install ruby
+    homebrew:
+      name: '{{ item.name | default(item) }}'
+      state: '{{ item.state | default("present") }}'
+    with_items:
+      - ruby
+
+  - name: Update ~/.profile to include ruby gems path
+    become: yes
+    become_user: '{{ user_id }}'
+    blockinfile:
+      dest: ~/.profile
+      create: True
+      marker: "# {mark} ANSIBLE MANAGED BLOCK"
+      block: |
+        if which ruby >/dev/null && which gem >/dev/null; then
+          PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+        fi
+
+  - name: Install foundational ruby gems
+    become: yes
+    become_user: '{{ user_id }}'
+    gem:
+      name: '{{ item.name | default(item) }}'
+      state: '{{ item.state | default("present") }}'
+    with_items: '{{ ruby_gems }}'

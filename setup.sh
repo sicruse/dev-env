@@ -39,6 +39,9 @@ else
 fi
 
 ############ Invoke Ansible ############
+echo Refreshing Ansible Galaxy...
+ansible-galaxy remove sicruse.dockapps
+ansible-galaxy install sicruse.dockapps
 echo Invoking Ansible...
 ansible-playbook -i "localhost," -c local $HOME/.dotfiles/setup.yml --extra-vars "user_id=$(whoami)"
 

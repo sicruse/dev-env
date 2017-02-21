@@ -1,0 +1,28 @@
+---
+  # tasks file for oh-my-zsh
+  - name: Install zsh
+    homebrew:
+      name: '{{ item.name | default(item) }}'
+      state: '{{ item.state | default("present") }}'
+    with_items:
+      - zsh
+
+  - name: Cloning oh-my-zsh
+    become: yes
+    become_user: '{{ user_id }}'
+    git:
+      repo=https://github.com/robbyrussell/oh-my-zsh
+      dest=~/.oh-my-zsh      
+
+  - name: Writing new ~/.zshrc
+    become: yes
+    become_user: '{{ user_id }}'
+    template: >
+      src=zshrc.j2
+      dest=~/.zshrc
+      mode=0755      
+
+  - name: Setting user shell to zsh
+    become: yes
+    become_user: root
+    user: name='{{ user_id }}' shell=/usr/local/bin/zsh

@@ -1,0 +1,3 @@
+dockapps_folders:
+    - { path: "~/Downloads",    view: fan   }
+    - { path: "~/Development",  view: fan  }
