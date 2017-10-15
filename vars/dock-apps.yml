@@ -1,5 +1,6 @@
 dockapps_apps:
     - {                                  description: "iTerm2 brings the terminal into the modern age with features you never knew you always wanted.", path: "/Applications/iTerm.app" }
+    - { cask: java,                      description: "Java Platform, Standard Edition (Java SE) lets you develop and deploy Java applications on desktops and servers, as well as in today's demanding embedded environments." }
     # Web Browsing
     - { cask: google-chrome,             description: "A fast, free web browser. One browser for your computer, phone and tablet", path: "/Applications/Google Chrome.app" }
     # Utilities
@@ -11,27 +12,41 @@ dockapps_apps:
     - { cask: reflector,                 description: "Wireless mirroring and streaming receiver that works great with Google Cast, AirPlay and AirParrot" }
     # Collaboration
     - { cask: hipchat,                   description: "Great teams use HipChat. Group chat, video chat, and screen sharing", path: "/Applications/HipChat.app" }
+    - { cask: slack,                     description: "Whatever work means for you, Slack brings all the pieces and people you need together so you can actually get things done.", path: "/Applications/Slack.app" }
     # Productivity
     - { cask: microsoft-office,          description: "From desktop to web and the devices in between, Office delivers the tools you need to get work done." }
     - {                                  description: "Microsoft Outlook", path: "/Applications/Microsoft Outlook.app"}
     - { cask: adobe-creative-cloud,      description: "Designer. Photographer. Filmmaker. Dreamer. No matter who you are, Creative Cloud gives you the world’s best creative apps so you can make just about anything you want, wherever inspiration takes you." }
     - { cask: nozbe,                     description: "Busy people and effective teams get tasks and projects done thanks to Nozbe system and apps", path: "/Applications/Nozbe.app" }
+    - {                                  description: "Things is the award-winning personal task manager that helps you achieve your goals.", path: "/Applications/Things3.app" }
     - { cask: evernote,                  description: "Cloud document storage", path: "/Applications/Evernote.app" }
     - { cask: skitch,                    description: "Get your point across with fewer words using annotation, shapes and sketches, so that your ideas become reality faster." }
+    - { cask: kap,                       description: "Capture your screen. An open-source screen recorder built with web technology" }
+    - { cask: popkey,                    description: "The perfect GIF - right at your fingertips" }
     - { cask: citrix-receiver,           description: "Citrix Receiver is the easy-to-install client software that provides access to your XenDesktop and XenApp installations." }
     # Development
     ## Editors / IDEs
     - {                                  description: "The integrated development environment (IDE) from Apple that is used to create, compile and test Mac OS X and iOS.", path: "/Applications/Xcode.app" }
+    - { cask: atom,                      description: "A hackable text editor for the 21st Century", path: "/Applications/Atom.app" }
     - { cask: sublime-text,              description: "Sublime Text is a sophisticated text editor for code, markup and prose.", path: "/Applications/Sublime Text.app" }
+    - { cask: codekit                    description: "Build websites faster and better" }
     - { cask: android-studio,            description: "Android Studio provides the fastest tools for building apps on every type of Android device." }
     - { cask: unity,                     description: "The number one game development platform. Unity gives you everything you need to realize your creative vision fast, and move ahead." }
     - { cask: blender,                   description: "Open Source 3D creation. Free to use for any purpose, forever." }
+    ## REST tools
+    - { cask: postman,                   description: "Developing APIs is hard. Postman makes it easy." }
     ## Version Control
     - { cask: sourcetree,                description: "Harness the power of Git and Hg in a beautifully simple application", path: "/Applications/SourceTree.app" }
     - { cask: p4merge,                   description: "P4Merge lets you visualize the differences between file versions. Color coding makes it easy to resolve conflicts that result from parallel or concurrent development." }
     ## Database
+    - { cask: mamp,                      description: "MAMP: My Apache - MySQL - PHP" }
     - { cask: mysqlworkbench,            description: "MySQL Workbench is a unified visual tool for database architects, developers, and DBAs. MySQL Workbench provides data modeling, SQL development, and comprehensive administration tools for server configuration, user administration, backup, and much more." }
+    - { cask: dbeaver-community,         description: "DBeaver is free and open source universal database tool for developers and database administrators." }
+    - { cask: sequel-pro,                description: "Sequel Pro is a fast, easy-to-use Mac database management application for working with MySQL databases." }
     - { cask: robomongo,                 description: "Native and cross-platform MongoDB manager" }
+    - { cask: mongodb-compass,           description: "The Easiest Way to Explore and Manipulate Your MongoDB Data" }
+    ## System Tools
+    - { cask: launchcontrol,             description: "LaunchControl is a fully-featured launchd GUI allowing you to create, manage and debug system- and user services on your Mac." }
     # Virtualization
     - { cask: parallels-desktop,         description: "The fastest, easiest, and most powerful solution for running Windows applications on a Mac—without rebooting.", path: "/Applications/Parallels Desktop.app" }
     - { cask: virtualbox,                description: "VirtualBox is a general-purpose full virtualizer for x86 hardware, targeted at server, desktop and embedded use." }
@@ -42,6 +57,7 @@ dockapps_apps:
     - { cask: ripit,                     description: "The simple DVD ripper for Macs." }
     - { cask: subler,                    description: "Subler is an Mac OS X app created to mux and tag mp4 files" }
     # Gaming
-    - { cask: steam,                     description: "Steam provides the user with nd automatic updating of games" }
+    - { cask: steam,                     description: "Steam provides the user with automatic updating of games" }
+    - { cask: discord,                   description: "All-in-one voice and text chat for gamers that’s free, secure, and works on both your desktop and phone." }
     # Administration
     - {                                  description: "Apple Remote Desktop is the best way to manage the Mac computers on your network.", path: "/Applications/Remote Desktop.app" }

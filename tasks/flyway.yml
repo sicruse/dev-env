@@ -1,0 +1,8 @@
+---
+# tasks file for foundational tools
+  - name: Install Flyway
+    homebrew:
+      name: '{{ item.name | default(item) }}'
+      state: '{{ item.state | default("present") }}'
+    with_items:
+      - flyway

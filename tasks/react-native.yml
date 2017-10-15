@@ -1,0 +1,15 @@
+---
+# tasks file for foundational tools
+  - name: Install react-native dependencies
+    homebrew:
+      name: '{{ item.name | default(item) }}'
+      state: '{{ item.state | default("present") }}'
+    with_items:
+      - node
+      - watchman
+      - yarn
+
+  - name: Install react-native-cli node.js package globally
+    npm:
+      name: react-native-cli
+      global: yes

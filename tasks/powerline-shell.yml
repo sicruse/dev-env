@@ -5,7 +5,8 @@
     become_user: '{{ user_id }}'
     git:
       repo=https://github.com/sicruse/powerline-shell.git
-      dest=~/.powerline-shell        
+      dest=~/.powerline-shell      
+    ignore_errors: yes
 
   - name: Writing new powerline-shell config
     become: yes
@@ -13,11 +14,11 @@
     template: >
       src=powerline-shell-config.py.j2
       dest=~/.powerline-shell/config.py
-      mode=0755     
+      mode=0755
 
   - name: Configuring powerline-shell
     become: yes
-    become_user: '{{ user_id }}'    
+    become_user: '{{ user_id }}'
     shell: ./install.py
     args:
       chdir: ~/.powerline-shell
@@ -38,10 +39,8 @@
 
   - name: Configuring powerline fonts
     become: yes
-    become_user: '{{ user_id }}'    
+    become_user: '{{ user_id }}'
     shell: ./install.sh
     args:
       chdir: ~/.powerline-fonts
     # ignore_errors: true
-
-
