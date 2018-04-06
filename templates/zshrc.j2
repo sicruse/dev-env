@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/{{user_id}}/.oh-my-zsh
+export ZSH={{ ansible_env.HOME }}/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -11,10 +11,10 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew ruby rvm sudo z)
+plugins=(git sudo z)
 
 # User configuration
-export PATH="$PATH:/usr/local/bin:/usr/local/sbin:/Users/{{user_id}}/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="$PATH:/usr/local/bin:/usr/local/sbin:{{ ansible_env.HOME }}/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 
 source $ZSH/oh-my-zsh.sh

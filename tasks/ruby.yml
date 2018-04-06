@@ -1,11 +1,21 @@
 ---
 # tasks file for foundational tools
-  - name: Install ruby
+  - name: Install zsh
     homebrew:
       name: '{{ item.name | default(item) }}'
       state: '{{ item.state | default("present") }}'
     with_items:
       - ruby
+    when: ansible_os_family == "Darwin"
+
+  - name: Install zsh
+    become: yes
+    apt:
+      name: '{{ item.name | default(item) }}'
+      state: '{{ item.state | default("present") }}'
+    with_items:
+      - ruby
+    when: ansible_os_family == "Debian"
 
   - name: Update ~/.profile to include ruby gems path
     become: yes
@@ -26,3 +36,4 @@
       name: '{{ item.name | default(item) }}'
       state: '{{ item.state | default("present") }}'
     with_items: '{{ ruby_gems }}'
+    when: ruby_gems is defined

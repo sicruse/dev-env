@@ -1,0 +1,89 @@
+---
+  - name: Check is watchman installed
+    shell: command -v watchman >/dev/null 2>&1
+    register: is_watchman_exist
+    ignore_errors: yes
+
+
+  - name: Install watchman
+    block:
+      - apt:
+          name: '{{ item.name | default(item) }}'
+          state: '{{ item.state | default("present") }}'
+        become: true
+        with_items:
+          - libssl-dev
+          - autoconf
+          - automake
+          - libtool
+
+      - git:
+          repo: https://github.com/facebook/watchman.git
+          version: v4.9.0
+          dest: ~/watchman
+          accept_hostkey: yes
+
+      - command: ./autogen.sh
+        args:
+          chdir: ~/watchman
+
+      - command: ./configure
+        args:
+          chdir: ~/watchman
+
+      - command: make
+        args:
+          chdir: ~/watchman
+
+      - command: make install
+        become: true
+        args:
+          chdir: ~sicruse/watchman
+
+    when: is_watchman_exist == False
+
+
+
+  # - name: Install watchman
+  # block:
+  #   - name: Install watchman build utilities
+  #     become: true
+  #     apt:
+  #       name: '{{ item.name | default(item) }}'
+  #       state: '{{ item.state | default("present") }}'
+  #     with_items:
+  #       - libssl-dev
+  #       - autoconf
+  #       - automake
+  #       - libtool
+  #
+  #   - name: Clone a watchman repository
+  #     git:
+  #       repo: https://github.com/facebook/watchman.git
+  #       version: v4.9.0
+  #       dest: ~/watchman
+  #       accept_hostkey: yes
+  #     become: no
+  #
+  #   - name: Watchman autogen
+  #     command: ./autogen.sh
+  #     args:
+  #       chdir: ~/watchman
+  #
+  #   - name: Watchman configure
+  #     command: ./configure
+  #     args:
+  #       chdir: ~/watchman
+  #
+  #   - name: Watchman build
+  #     command: make
+  #     args:
+  #       chdir: ~/watchman
+  #
+  #   - name: Watchman install
+  #     become: true
+  #     command: make install
+  #     args:
+  #       chdir: ~sicruse/watchman
+  #
+  #   when: is_watchman_exist == False

@@ -1,0 +1,26 @@
+---
+#- name: Setup Linux Base Packages
+#  hosts: all
+#  become: true
+#  become_user: sicruse
+#  vars:
+#    node_version: 8.0.0
+#    node_versions:
+#      - 8.0.0
+#    node_packages:
+#  roles:
+#    - role: fubarhouse.nodejs
+
+- name: Setup Linux Development Environment
+  hosts: all
+
+  vars_files:
+    - vars/vars.yml
+
+  pre_tasks:
+    - include: tasks/git-linux.yml
+    - include: tasks/ruby.yml
+    - include: tasks/powerline-shell.yml
+    - include: tasks/oh-my-zsh.yml
+    - include: tasks/node-linux.yml
+    - include: tasks/watchman-linux.yml

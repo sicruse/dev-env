@@ -6,13 +6,23 @@
       state: '{{ item.state | default("present") }}'
     with_items:
       - zsh
+    when: ansible_os_family == "Darwin"
+
+  - name: Install zsh
+    become: yes
+    apt:
+      name: '{{ item.name | default(item) }}'
+      state: '{{ item.state | default("present") }}'
+    with_items:
+      - zsh
+    when: ansible_os_family == "Debian"
 
   - name: Cloning oh-my-zsh
     become: yes
     become_user: '{{ user_id }}'
     git:
       repo=https://github.com/robbyrussell/oh-my-zsh
-      dest=~/.oh-my-zsh      
+      dest=~/.oh-my-zsh
 
   - name: Writing new ~/.zshrc
     become: yes
@@ -20,9 +30,16 @@
     template: >
       src=zshrc.j2
       dest=~/.zshrc
-      mode=0755      
+      mode=0755
 
   - name: Setting user shell to zsh
     become: yes
     become_user: root
     user: name='{{ user_id }}' shell=/usr/local/bin/zsh
+    when: ansible_os_family == "Darwin"
+
+  - name: Setting user shell to zsh
+    become: yes
+    become_user: root
+    user: name='{{ user_id }}' shell=/usr/bin/zsh
+    when: ansible_os_family == "Debian"
