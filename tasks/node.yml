@@ -18,13 +18,13 @@
       name: nodejs
       state: present
 
-  - name: Install npm global packages
-    become: true
-    npm:
-      name: '{{ item.name | default(item) }}'
-      state: '{{ item.state | default("present") }}'
-      version: '{{ item.version | default(omit) }}'
-      production: '{{ item.production | default(omit) }}'
-      global: True
-    with_items:
-      - nuclide
+  # - name: Install npm global packages
+  #   become: true
+  #   npm:
+  #     name: '{{ item.name | default(item) }}'
+  #     state: '{{ item.state | default("present") }}'
+  #     version: '{{ item.version | default(omit) }}'
+  #     production: '{{ item.production | default(omit) }}'
+  #     global: True
+  #   with_items:
+  #     - nuclide

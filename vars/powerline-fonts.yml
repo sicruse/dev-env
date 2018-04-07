@@ -1,0 +1,9 @@
+all_users:                            # this role can configure for one or more users
+  - user: '{{ ansible_user_id }}'     # username
+    homedir: '{{ ansible_env.HOME }}' # the home dir for the username
+
+all_fonts:              # the fonts you want to install
+  - RobotoMono          # the name of these fonts must match the name of the
+  - SourceCodePro       # font directory
+  - DejaVuSansMono
+  - UbuntuMono

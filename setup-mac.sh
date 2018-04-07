@@ -42,9 +42,10 @@ fi
 
 ############ Invoke Ansible ############
 echo Refreshing Ansible Galaxy...
-ansible-galaxy remove sicruse.dockapps
-ansible-galaxy install sicruse.dockapps
+# ansible-galaxy install -f tvieira.powerline-fonts
+# ansible-galaxy install -f sicruse.dockapps
+ansible-galaxy install -f -r requirements.yml
 echo Invoking Ansible...
-ansible-playbook -i "localhost," -c local $HOME/.dotfiles/setup-mac.yml --extra-vars "user_id=$(whoami)"
+ansible-playbook -i "localhost," -c local $HOME/.dotfiles/setup.yml --extra-vars "user_id=$(whoami)"
 
 echo "Setup complete..."

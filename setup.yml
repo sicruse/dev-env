@@ -1,0 +1,33 @@
+---
+- name: Setup Development Environment
+  hosts: all
+
+  vars_files:
+    - vars/vars.yml
+    - vars/powerline-fonts.yml
+    - vars/ruby-gems.yml
+    - vars/dock-apps.yml
+    - vars/dock-folders.yml
+
+  pre_tasks:
+    - include: tasks/git.yml
+    - include: tasks/ruby.yml
+    - include: tasks/oh-my-zsh.yml
+
+  post_tasks:
+    # Linux stuff
+    - include: tasks/node.yml
+      when: ansible_os_family == "Debian"
+    - include: tasks/watchman.yml
+      when: ansible_os_family == "Debian"
+    # Mac stuff
+    - include: tasks/flyway.yml
+      when: ansible_os_family == "Darwin"
+    - include: tasks/iterm.yml
+      when: ansible_os_family == "Darwin"
+    - include: tasks/react-native.yml
+      when: ansible_os_family == "Darwin"
+
+  roles:
+    - tvieira.powerline-fonts
+    - { role: sicruse.dockapps, when: ansible_os_family == 'Darwin' }

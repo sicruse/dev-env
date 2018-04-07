@@ -1,32 +1,30 @@
 ---
   # tasks file for oh-my-zsh
   - name: Install zsh
-    homebrew:
-      name: '{{ item.name | default(item) }}'
-      state: '{{ item.state | default("present") }}'
-    with_items:
-      - zsh
-    when: ansible_os_family == "Darwin"
-
-  - name: Install zsh
     become: yes
-    apt:
+    package:
       name: '{{ item.name | default(item) }}'
       state: '{{ item.state | default("present") }}'
     with_items:
-      - zsh
-    when: ansible_os_family == "Debian"
+     - zsh
 
   - name: Cloning oh-my-zsh
     become: yes
-    become_user: '{{ user_id }}'
+    become_user: '{{ ansible_user_id }}'
     git:
       repo=https://github.com/robbyrussell/oh-my-zsh
       dest=~/.oh-my-zsh
 
+  - name: Cloning powerlevel9k theme
+    become: yes
+    become_user: '{{ ansible_user_id }}'
+    git:
+      repo=https://github.com/bhilburn/powerlevel9k.git
+      dest=~/.oh-my-zsh/custom/themes/powerlevel9k
+
   - name: Writing new ~/.zshrc
     become: yes
-    become_user: '{{ user_id }}'
+    become_user: '{{ ansible_user_id }}'
     template: >
       src=zshrc.j2
       dest=~/.zshrc
@@ -35,11 +33,11 @@
   - name: Setting user shell to zsh
     become: yes
     become_user: root
-    user: name='{{ user_id }}' shell=/usr/local/bin/zsh
+    user: name='{{ ansible_user_id }}' shell=/usr/local/bin/zsh
     when: ansible_os_family == "Darwin"
 
   - name: Setting user shell to zsh
     become: yes
     become_user: root
-    user: name='{{ user_id }}' shell=/usr/bin/zsh
+    user: name='{{ ansible_user_id }}' shell=/usr/bin/zsh
     when: ansible_os_family == "Debian"

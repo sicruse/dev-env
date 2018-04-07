@@ -1,4 +1,0 @@
----
-  ruby_gems:
-    - cocoapods                 # CocoaPods is a dependency manager for Swift and Objective-C Cocoa projects. It has over 28 thousand libraries and is used in over 1.7 million apps.
-    - fastlane                  # fastlane is the tool to release your iOS and Android app. It handles all tedious tasks, like generating screenshots, dealing with code signing, and releasing your application.
