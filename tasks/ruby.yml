@@ -1,6 +1,6 @@
 ---
   - name: Install ruby
-    become: yes
+    become: ansible_os_family == "Debian"
     package:
       name: '{{ item.name | default(item) }}'
       state: '{{ item.state | default("present") }}'

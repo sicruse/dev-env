@@ -43,7 +43,7 @@ dockapps_apps:
     - { cask: mysqlworkbench,            description: "MySQL Workbench is a unified visual tool for database architects, developers, and DBAs. MySQL Workbench provides data modeling, SQL development, and comprehensive administration tools for server configuration, user administration, backup, and much more." }
     - { cask: dbeaver-community,         description: "DBeaver is free and open source universal database tool for developers and database administrators." }
     - { cask: sequel-pro,                description: "Sequel Pro is a fast, easy-to-use Mac database management application for working with MySQL databases." }
-    - { cask: robomongo,                 description: "Native and cross-platform MongoDB manager" }
+    - { cask: robo-3t,                   description: "Native and cross-platform MongoDB manager" }
     - { cask: mongodb-compass,           description: "The Easiest Way to Explore and Manipulate Your MongoDB Data" }
     ## System Tools
     - { cask: launchcontrol,             description: "LaunchControl is a fully-featured launchd GUI allowing you to create, manage and debug system- and user services on your Mac." }

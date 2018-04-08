@@ -20,24 +20,24 @@
       - git:
           repo: https://github.com/facebook/watchman.git
           version: v4.9.0
-          dest: ~/watchman
+          dest: /tmp/watchman
           accept_hostkey: yes
 
       - command: ./autogen.sh
         args:
-          chdir: ~/watchman
+          chdir: /tmp/watchman
 
       - command: ./configure
         args:
-          chdir: ~/watchman
+          chdir: /tmp/watchman
 
       - command: make
         args:
-          chdir: ~/watchman
+          chdir: /tmp/watchman
 
       - command: make install
         become: true
         args:
-          chdir: ~sicruse/watchman
+          chdir: /tmp/watchman
 
     when: is_watchman_exist == False
