@@ -10,15 +10,15 @@
 
   - name: Writing iTerm2 preferences
     become: yes
-    become_user: '{{ user_id }}'
+    become_user: '{{ ansible_user_id }}'
     template: >
       src=com.googlecode.iterm2.plist.j2
       dest=~/Library/Preferences/com.googlecode.iterm2.plist
-      mode=0755   
+      mode=0755
 
   - name: Converting & reloading iTerm2 preferences
     become: yes
-    become_user: '{{ user_id }}'    
+    become_user: '{{ ansible_user_id }}'    
     shell: plutil -convert binary1 com.googlecode.iterm2.plist && defaults read com.googlecode.iterm2
     args:
       chdir: ~/Library/Preferences
