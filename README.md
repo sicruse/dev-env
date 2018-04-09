@@ -1,7 +1,7 @@
 Si Cruse's dotfiles
 ===================
 
-My dotfiles configuration for Mac OSX provides a one-stop shop for preparing a new Mac for productive development use.
+My dotfiles configuration for Mac OSX (and now Ubuntu Linux!) provides a one-stop shop for preparing a productive development environment.
 
 Installation
 ------------
@@ -20,19 +20,18 @@ If you would like to improve my approach or customize for your own personal app 
 ```
 * vars.yml 					- contains your git identity
 * ruby_gems.yml 			- contains the list of ruby gems to install
-* dock-apps.yml 			- contains the list of apps to install and dock
-* dock-folders.yml 			- contains the list of folders to dock
+* dock-apps.yml 			- contains the list of apps to install on the MacOSX dock
+* dock-folders.yml 			- contains the list of folders add to the MacOSX dock
 ```
 
 Key Foundational Components
 ---------------------------
 
-The following tools are IMHO foundational to developing with the Mac. Git & git-flow for software configuration management, iTerm for ease of use, oh-my-zsh & powerline shell for a beautiful experience and ruby ... because well ... ruby.
+The following tools are IMHO foundational to developing. Git & git-flow for software configuration management, oh-my-zsh & powerlevel9k for a beautiful experience and ruby ... because well ... ruby.
 
 * [Git](https://git-scm.com/) & [Git-flow](http://danielkummer.github.io/git-flow-cheatsheet/)
-* [iTerm](https://www.iterm2.com/)
 * [Oh-My-Zsh](https://github.com/robbyrussell/oh-my-zsh)
-* [Powerline shell](https://github.com/banga/powerline-shell)
+* [Powerlevel9k](https://github.com/bhilburn/powerlevel9k)
 * [Ruby](https://www.ruby-lang.org/en/)
 
 Key Apps
@@ -108,10 +107,11 @@ These tools are installed as needed by **setup.sh** in prelude to invoking Ansib
 * Homebrew - for package & app installation
 * Ansible - for determenistic component installation
 * [sicruse.dockapps](https://galaxy.ansible.com/sicruse/dockapps/) - for app installation & dock management
+* [sicruse.powerline-fonts](https://galaxy.ansible.com/sicruse/powerline-fonts/) - to install fonts required for powerlevel9k
 
 **Note:** see the documentation for **sicruse.dockapps** for more detail upon how to configure your own preferred apps.
 
-Assumptions
+Assumptions (Mac OSX)
 -----------
 
 The configuration assumes that you have manually installed XCode & Apple Remote Desktop. If you have not installed them you will notice a couple of '?' sysmbols on the dock.

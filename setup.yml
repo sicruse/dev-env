@@ -1,21 +1,33 @@
 ---
-- name: Setup MacOSX Development Environment
+- name: Setup Development Environment
   hosts: all
 
   vars_files:
     - vars/vars.yml
-    - vars/ruby_gems.yml
+    - vars/powerline-fonts.yml
+    - vars/ruby-gems.yml
     - vars/dock-apps.yml
-    - vars/dock-folders.yml 
+    - vars/dock-folders.yml
 
   pre_tasks:
-    - include: tasks/git.yml
-    - include: tasks/ruby.yml
-    - include: tasks/oh-my-zsh.yml
-    - include: tasks/powerline-shell.yml
-    - include: tasks/iterm.yml
-    - include: tasks/flyway.yml
-    - include: tasks/react-native.yml
+    - include_tasks: tasks/git.yml
+    - include_tasks: tasks/ruby.yml
+    - include_tasks: tasks/oh-my-zsh.yml
+
+  post_tasks:
+    # Linux stuff
+    - include_tasks: tasks/node.yml
+      when: ansible_os_family == "Debian"
+    - include_tasks: tasks/watchman.yml
+      when: ansible_os_family == "Debian"
+    # Mac stuff
+    - include_tasks: tasks/flyway.yml
+      when: ansible_os_family == "Darwin"
+    - include_tasks: tasks/iterm.yml
+      when: ansible_os_family == "Darwin"
+    - include_tasks: tasks/react-native.yml
+      when: ansible_os_family == "Darwin"
 
   roles:
-    - sicruse.dockapps
+    - sicruse.powerline-fonts
+    - { role: sicruse.dockapps, when: ansible_os_family == 'Darwin' }

@@ -29,7 +29,7 @@ dockapps_apps:
     - {                                  description: "The integrated development environment (IDE) from Apple that is used to create, compile and test Mac OS X and iOS.", path: "/Applications/Xcode.app" }
     - { cask: atom,                      description: "A hackable text editor for the 21st Century", path: "/Applications/Atom.app" }
     - { cask: sublime-text,              description: "Sublime Text is a sophisticated text editor for code, markup and prose.", path: "/Applications/Sublime Text.app" }
-    - { cask: codekit                    description: "Build websites faster and better" }
+    - { cask: codekit,                    description: "Build websites faster and better" }
     - { cask: android-studio,            description: "Android Studio provides the fastest tools for building apps on every type of Android device." }
     - { cask: unity,                     description: "The number one game development platform. Unity gives you everything you need to realize your creative vision fast, and move ahead." }
     - { cask: blender,                   description: "Open Source 3D creation. Free to use for any purpose, forever." }
@@ -43,7 +43,7 @@ dockapps_apps:
     - { cask: mysqlworkbench,            description: "MySQL Workbench is a unified visual tool for database architects, developers, and DBAs. MySQL Workbench provides data modeling, SQL development, and comprehensive administration tools for server configuration, user administration, backup, and much more." }
     - { cask: dbeaver-community,         description: "DBeaver is free and open source universal database tool for developers and database administrators." }
     - { cask: sequel-pro,                description: "Sequel Pro is a fast, easy-to-use Mac database management application for working with MySQL databases." }
-    - { cask: robomongo,                 description: "Native and cross-platform MongoDB manager" }
+    - { cask: robo-3t,                   description: "Native and cross-platform MongoDB manager" }
     - { cask: mongodb-compass,           description: "The Easiest Way to Explore and Manipulate Your MongoDB Data" }
     ## System Tools
     - { cask: launchcontrol,             description: "LaunchControl is a fully-featured launchd GUI allowing you to create, manage and debug system- and user services on your Mac." }
