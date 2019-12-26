@@ -3,31 +3,55 @@
   hosts: all
 
   vars_files:
-    - vars/vars.yml
-    - vars/powerline-fonts.yml
-    - vars/ruby-gems.yml
-    - vars/dock-apps.yml
-    - vars/dock-folders.yml
+    - vars/dotfiles.yml
+    - vars/homebrew.yml
+    - vars/rubygems.yml
+    - vars/masapps.yml
+    - vars/dockapps.yml
 
   pre_tasks:
-    - include_tasks: tasks/git.yml
+    - include_tasks: tasks/zsh.yml
+      tags:
+      - zsh
+
     - include_tasks: tasks/ruby.yml
-    - include_tasks: tasks/oh-my-zsh.yml
+      tags:
+      - ruby
 
   post_tasks:
     # Linux stuff
-    - include_tasks: tasks/node.yml
+    - include_tasks: tasks/node-linux.yml
       when: ansible_os_family == "Debian"
-    - include_tasks: tasks/watchman.yml
-      when: ansible_os_family == "Debian"
+      tags:
+      - node
+
     # Mac stuff
-    - include_tasks: tasks/flyway.yml
-      when: ansible_os_family == "Darwin"
-    - include_tasks: tasks/iterm.yml
-      when: ansible_os_family == "Darwin"
     - include_tasks: tasks/react-native.yml
       when: ansible_os_family == "Darwin"
+      tags:
+      - react-native
 
   roles:
-    - sicruse.powerline-fonts
-    - { role: sicruse.dockapps, when: ansible_os_family == 'Darwin' }
+    - role: sicruse.powerline-fonts
+      tags:
+      - powerline
+
+    - role: geerlingguy.dotfiles
+      when: ansible_os_family == 'Darwin'
+      tags:
+      - dotfiles
+
+    - role: geerlingguy.homebrew
+      when: ansible_os_family == 'Darwin'
+      tags:
+      - homebrew
+
+    - role: geerlingguy.mas
+      when: ansible_os_family == 'Darwin'
+      tags:
+      - mas
+
+    - role: sicruse.dockapps
+      when: ansible_os_family == 'Darwin'
+      tags:
+      - dockapps

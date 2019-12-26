@@ -1,0 +1,15 @@
+dockapps_apps:
+  - "/Applications/Hyper.app"
+  - "/Applications/Safari.app"
+  - "/Applications/Things3.app"
+  - "/Applications/Evernote.app"
+  - "/Applications/Xcode.app"
+  - "/Applications/Atom.app"
+  - "/Applications/SourceTree.app"
+  - "/Applications/Remote Desktop.app"
+  - "/System/Applications/Messages.app"
+  - "/System/Applications/Photos.app"
+
+dockapps_folders:
+    - path: "/Users/{{ ansible_user_id }}/Downloads"
+    - path: "/Users/{{ ansible_user_id }}/Development"

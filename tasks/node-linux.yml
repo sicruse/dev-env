@@ -1,9 +1,38 @@
 ---
+  - name: Install the gpg key for nodejs LTS
+    become: true
+    apt_key:
+      url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+      state: present
+
+  - name: Install the nodejs LTS repos
+    become: true
+    apt_repository:
+      repo: "deb https://deb.nodesource.com/node_7.x {{ ansible_distribution_release }} main"
+      state: present
+      update_cache: yes
+
+  - name: Install the nodejs
+    become: true
+    apt:
+      name: nodejs
+      state: present
+
+  # - name: Install npm global packages
+  #   become: true
+  #   npm:
+  #     name: '{{ item.name | default(item) }}'
+  #     state: '{{ item.state | default("present") }}'
+  #     version: '{{ item.version | default(omit) }}'
+  #     production: '{{ item.production | default(omit) }}'
+  #     global: True
+  #   with_items:
+  #     - nuclide
+
   - name: Check is watchman installed
     shell: command -v watchman >/dev/null 2>&1
     register: is_watchman_exist
     ignore_errors: yes
-
 
   - name: Install build tools & build watchman
     block:

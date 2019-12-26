@@ -1,8 +1,0 @@
----
-# tasks file for foundational tools
-  - name: Install Flyway
-    package:
-      name: '{{ item.name | default(item) }}'
-      state: '{{ item.state | default("present") }}'
-    with_items:
-      - flyway

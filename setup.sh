@@ -11,8 +11,8 @@ case "${unameOut}" in
 esac
 
 case "${machine}" in
-  Linux)      ./setup-linux.sh;;
-  Mac)        ./setup-mac.sh;;
+  Linux)      $HOME/.dev-env/setup-linux.sh;;
+  Mac)        $HOME/.dev-env/setup-mac.sh;;
   *)
     echo "No dotfile support for $machine..."
     exit 1

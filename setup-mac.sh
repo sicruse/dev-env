@@ -40,12 +40,35 @@ else
    echo Ansible already present...
 fi
 
+############ Install dialog ############
+if ! command -v dialog >/dev/null; then
+   echo Installing dialog...
+   brew install dialog
+else
+   echo Dialog already present...
+fi
+
+############ Present Options ############
+height=22
+width=50
+cmd=(dialog --separate-output --checklist "Select options:" $height $width 16)
+options=(zsh "zsh and oh-my-zsh" on    # any option can be set to default to "on"
+         ruby "ruby" on
+         node "node" on
+         react-native "react native" on
+         powerline "powerline fonts" on
+         dotfiles "dotfiles" on
+         homebrew "homebrew" on
+         mas "mas" on
+         dockapps "OSX Dock" on
+         )
+choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+
 ############ Invoke Ansible ############
 echo Refreshing Ansible Galaxy...
-# ansible-galaxy install -f tvieira.powerline-fonts
-# ansible-galaxy install -f sicruse.dockapps
-ansible-galaxy install -f -r requirements.yml
+ansible-galaxy install -r $HOME/.dev-env/requirements.yml
+
 echo Invoking Ansible...
-ansible-playbook -i "localhost," -c local $HOME/.dotfiles/setup.yml --extra-vars "user_id=$(whoami)"
+ansible-playbook -i "localhost," -c local $HOME/.dev-env/setup.yml  --tags "${choices//$'\n'/,}"
 
 echo "Setup complete..."

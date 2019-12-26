@@ -1,0 +1,87 @@
+---
+  homebrew_taps:
+    - homebrew/core
+    - homebrew/cask
+
+  homebrew_installed_packages:
+    - git
+    - git-flow
+    - flyway
+    - httpie
+    - node
+    - nvm
+    - watchman
+    - yarn
+    - wget
+    - jq
+    - python-yq
+    - zsh
+
+  homebrew_cask_appdir: /Applications
+  homebrew_cask_apps:
+    # Web Browsing
+    # - google-chrome
+
+    # Utilities
+    # - java
+    - adoptopenjdk
+    - coconutbattery
+    - tunnelblick
+    - colorpicker-skalacolor
+    - reflector
+
+    # Collaboration
+    # - slack
+
+    # Office Productivity Tools
+    # - microsoft-office
+    # - adobe-creative-cloud
+    - evernote
+    - skitch
+    # - kap
+    # - popkey
+
+    # Development
+    ## Terminals
+    - hyper
+
+    ## Editors / IDEs
+    - atom
+    # - sublime-text
+    # - codekit
+    # - android-studio
+    # - unity
+    # - blender
+
+    ## REST tools
+    # - postman
+
+    ## Version Control
+    - sourcetree
+    - p4v
+
+    ## Database
+    # - mamp
+    # - mysqlworkbench
+    # - dbeaver-community
+    # - sequel-pro
+    # - robo-3t
+    # - mongodb-compass
+
+    ## System Tools
+    - launchcontrol
+
+    # Virtualization
+    # - parallels-desktop
+    - virtualbox
+    - vagrant
+    # - docker
+    # - kitematic
+
+    # Ripping
+    # - ripit
+    # - subler
+
+    # Gaming
+    # - steam
+    # - discord

@@ -1,2 +1,5 @@
+- src: geerlingguy.dotfiles
+- src: geerlingguy.homebrew
+- src: geerlingguy.mas
 - src: sicruse.powerline-fonts
 - src: sicruse.dockapps

@@ -1,13 +1,5 @@
 ---
-  # tasks file for oh-my-zsh
-  - name: Install zsh
-    become: ansible_os_family == "Debian"
-    package:
-      name: '{{ item.name | default(item) }}'
-      state: '{{ item.state | default("present") }}'
-    with_items:
-     - zsh
-
+  # tasks file for zsh
   - name: Cloning oh-my-zsh
     become: yes
     become_user: '{{ ansible_user_id }}'
@@ -21,14 +13,6 @@
     git:
       repo=https://github.com/bhilburn/powerlevel9k.git
       dest=~/.oh-my-zsh/custom/themes/powerlevel9k
-
-  - name: Writing new ~/.zshrc
-    become: yes
-    become_user: '{{ ansible_user_id }}'
-    template: >
-      src=zshrc.j2
-      dest=~/.zshrc
-      mode=0755
 
   - name: Setting user shell to zsh
     become: yes

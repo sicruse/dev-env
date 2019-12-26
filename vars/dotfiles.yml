@@ -1,0 +1,16 @@
+  # configure_dotfiles: yes
+  # configure_sudoers: yes
+  # configure_terminal: yes
+  # configure_osx: yes
+
+  dotfiles_repo: https://github.com/sicruse/dotfiles.git
+  dotfiles_repo_accept_hostkey: yes
+  dotfiles_repo_local_destination: ~/Development/dotfiles
+  dotfiles_files:
+    - .zshrc
+    # - .gitignore
+    # - .inputrc
+    - .osx
+    # - .vimrc
+    - .gitconfig
+    - .hyper.js
