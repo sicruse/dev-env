@@ -1,0 +1,10 @@
+---
+  - name: Install Linux packages
+    become: true
+    package:
+      name: '{{ item.name | default(item) }}'
+      state: '{{ item.state | default("present") }}'
+    with_items:
+      - git
+      - git-flow
+      - zsh

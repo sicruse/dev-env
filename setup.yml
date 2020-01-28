@@ -3,13 +3,19 @@
   hosts: all
 
   vars_files:
-    - vars/dotfiles.yml
     - vars/homebrew.yml
     - vars/rubygems.yml
     - vars/masapps.yml
     - vars/dockapps.yml
 
   pre_tasks:
+    - include_vars: vars/dotfiles-{{ ansible_os_family }}.yml
+
+    - include_tasks: tasks/linux.yml
+      when: ansible_os_family == "Debian"
+      tags:
+      - packages
+
     - include_tasks: tasks/zsh.yml
       tags:
       - zsh
@@ -37,21 +43,20 @@
       - powerline
 
     - role: geerlingguy.dotfiles
-      when: ansible_os_family == 'Darwin'
       tags:
       - dotfiles
 
     - role: geerlingguy.homebrew
-      when: ansible_os_family == 'Darwin'
+      when: ansible_os_family == "Darwin"
       tags:
       - homebrew
 
     - role: geerlingguy.mas
-      when: ansible_os_family == 'Darwin'
+      when: ansible_os_family == "Darwin"
       tags:
       - mas
 
     - role: sicruse.dockapps
-      when: ansible_os_family == 'Darwin'
+      when: ansible_os_family == "Darwin"
       tags:
       - dockapps

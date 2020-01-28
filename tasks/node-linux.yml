@@ -8,7 +8,7 @@
   - name: Install the nodejs LTS repos
     become: true
     apt_repository:
-      repo: "deb https://deb.nodesource.com/node_7.x {{ ansible_distribution_release }} main"
+      repo: "deb https://deb.nodesource.com/node_13.x {{ ansible_distribution_release }} main"
       state: present
       update_cache: yes
 
