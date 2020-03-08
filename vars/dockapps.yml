@@ -7,6 +7,7 @@ dockapps_apps:
   - "/Applications/Atom.app"
   - "/Applications/SourceTree.app"
   - "/Applications/Remote Desktop.app"
+  - "/Applications/Cyberduck.app"
   - "/System/Applications/Messages.app"
   - "/System/Applications/Photos.app"
 

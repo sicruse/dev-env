@@ -13,3 +13,5 @@ mas_installed_apps:
   - { id: 409183694, name: "Keynote" }
   - { id: 409203825, name: "Numbers" }
   - { id: 1116599239, name: "NordVPN IKE - Unlimited VPN" }
+  - { id: 409222199, name: "Cyberduck" }
+
