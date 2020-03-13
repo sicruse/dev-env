@@ -16,6 +16,7 @@
     - jq
     - python-yq
     - zsh
+    - zsh-history-substring-search
 
   homebrew_cask_appdir: /Applications
   homebrew_cask_apps:
@@ -26,9 +27,10 @@
     # - java
     - adoptopenjdk
     - coconutbattery
-    - tunnelblick
+    # - tunnelblick
     - colorpicker-skalacolor
     - reflector
+    - daisydisk
 
     # Collaboration
     # - slack
@@ -38,6 +40,9 @@
     # - adobe-creative-cloud
     - evernote
     - skitch
+    - scrivener
+    - kindle
+    - acorn
     # - kap
     # - popkey
 
