@@ -7,56 +7,46 @@
     - vars/rubygems.yml
     - vars/masapps.yml
     - vars/dockapps.yml
+    - "vars/dotfiles-{{ ansible_os_family|lower }}.yml"
 
   pre_tasks:
-    - include_vars: vars/dotfiles-{{ ansible_os_family }}.yml
-
-    - include_tasks: tasks/linux.yml
+    # Linux
+    - name: Install linux packages
+      import_tasks: tasks/linux.yml
       when: ansible_os_family == "Debian"
       tags:
       - packages
 
-    - include_tasks: tasks/zsh.yml
+    # Universal
+    - name: Install zsh
+      import_tasks: tasks/zsh.yml
       tags:
       - zsh
-
-    - include_tasks: tasks/ruby.yml
+    - name: Install ruby
+      import_tasks: tasks/ruby.yml
       tags:
       - ruby
 
   post_tasks:
-    # Linux stuff
-    - include_tasks: tasks/node-linux.yml
+    # Linux
+    - name: Install node for linux
+      import_tasks: tasks/node-linux.yml
       when: ansible_os_family == "Debian"
       tags:
       - node
 
-    # Mac stuff
-    - include_tasks: tasks/react-native.yml
+    # Mac
+    - name: Install react native
+      import_tasks: tasks/react-native.yml
       when: ansible_os_family == "Darwin"
       tags:
       - react-native
 
   roles:
-    - role: sicruse.powerline-fonts
-      tags:
-      - powerline
-
-    - role: geerlingguy.dotfiles
-      tags:
-      - dotfiles
-
-    - role: geerlingguy.homebrew
-      when: ansible_os_family == "Darwin"
-      tags:
-      - homebrew
-
-    - role: geerlingguy.mas
-      when: ansible_os_family == "Darwin"
-      tags:
-      - mas
-
-    - role: sicruse.dockapps
-      when: ansible_os_family == "Darwin"
-      tags:
-      - dockapps
+    # Universal roles
+    - { role: sicruse.powerline-fonts,  tags: ['powerline'] }
+    - { role: geerlingguy.dotfiles,     tags: ['dotfiles'] }
+    # Mac roles
+    - { role: geerlingguy.homebrew,     tags: ['homebrew'], when: ansible_os_family == "Darwin" }
+    - { role: geerlingguy.mas,          tags: ['mas']     , when: ansible_os_family == "Darwin" }
+    - { role: sicruse.dockapps,         tags: ['dockapps'], when: ansible_os_family == "Darwin" }
